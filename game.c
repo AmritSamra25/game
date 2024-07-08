@@ -16,7 +16,7 @@ int main(int argc, char **argv) {
     printf("Enter new board height: ");
     scanf ("%d" , &b.height);
 
-    board_init (b2, 30, 40);
+    board_init(b2, 30, 40);
 
     printf("board sizes: %d, %d, %d, %d\n", b.width, b.height, b2->width, b2-> height);
 }
