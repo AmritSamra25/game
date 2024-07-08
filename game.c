@@ -9,7 +9,7 @@ int main(int argc, char **argv) {
 
     printf ("Initial board sizes: %d %d %d %d\n", b.width, b.height, b2->width,b2->height);
 
-    board_init (&b,0,0);
+    board_init(&b,0,0);
 
     printf("Enter new board width: ");
     scanf("%d" , &b.width);
