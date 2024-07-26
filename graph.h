@@ -6,10 +6,10 @@
 
 struct Graph
 {
-    struct node* nodes;  //Points to an array of nodes
+    struct node* nodes;  //Points to an array of nodes (NOTE: this declaration could also apply to a linked list)
 };
 
 
-void edge_init(struct Graph* n);
+void graph_init(struct Graph* g);
 
 #endif 
