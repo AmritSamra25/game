@@ -1,7 +1,5 @@
 #include <stdlib.h>
 #include "board.h"
-
-
 /* 
  * Initialize the board.
  * Parameters:
@@ -22,8 +20,8 @@ int board_init(struct Board* b, int width, int height) {
     if (b == 0) return -1;
     if ((width<0) || (height<0)) return -2;
 
-    b->width = width;
-    b->height = height;
+    b->width = width; //b points to the width from board.h
+    b->height = height; //b points to the height from board.h
 
     return 0;
 }

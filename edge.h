@@ -6,8 +6,8 @@
 
 struct Edge
 {
-    struct node* node2;
-    struct node* node1;
+    struct node* node2; // makes the node 
+    struct node* node1; // makes the node 
 };
 
 

@@ -7,7 +7,7 @@
 
 struct Node
 {
-    struct rocks* rock;
+    struct rocks* rock; //
     struct edge* edge;
 };
 
