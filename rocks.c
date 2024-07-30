@@ -19,9 +19,13 @@
  *     width and height must be positive integers.
  */
 int rocks_init(struct rocks* r, int color) {
+    //if statments to see if the rocks value is 0 or -1
     if (r == 0) return -1;
+    // if the color is less then white and / or if the color is greater then purple return -2
+    // the color values are in rock.h
     if (color < WHITE || color > PURPLE) return -2;
 
+    //r points to a color
     r->color = color;
 
     return 0;

@@ -24,6 +24,7 @@ struct rocks {
  *   -1 if b==0
  *   -2 if width or height is negative.
  */
+// rock init 
 int rocks_init(struct rocks* b, int color);
 
 #endif

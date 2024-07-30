@@ -6,10 +6,10 @@
 
 struct player
 {
-    char* name;
+    char* name; // the charcter name (gets name of charcter)
     struct rocks* rock; // makes the rock 
 };
 
-
+//void player init 
 void player_init(struct player* p,char* pname);
 #endif

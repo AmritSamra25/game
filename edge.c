@@ -1,5 +1,6 @@
 #include "edge.h"
 
+//void edge init
 void edge_init(struct Edge* n){
 
     
