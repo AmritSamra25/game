@@ -10,7 +10,11 @@
  * 
  * 
  */
-struct rocks {
+
+
+struct Rocks
+
+{
     int color;   
 };
 /* 
@@ -25,6 +29,6 @@ struct rocks {
  *   -2 if width or height is negative.
  */
 // rock init 
-int rocks_init(struct rocks* b, int color);
+int rocks_init(struct Rocks* b, int color);
 
 #endif
