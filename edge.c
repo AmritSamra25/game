@@ -1,9 +1,8 @@
 #include "edge.h"
 
 //void edge init
-void edge_init(struct Edge* n){
-
-    
-    n->node1 = 0; //copies the node, NOT the name 
-    n->node2 = 0; //copies the node, NOT the edge
+void edge_init(struct Edge* e, int num_nodes, struct Node* node1, struct Node* node2){
+    int i = 0;
+    e->node1 = node1;
+    e->node2 = node2;
 }
