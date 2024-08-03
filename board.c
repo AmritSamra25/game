@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include "board.h"
 #include "graph.h"
+
 /* 
  * Initialize the board.
  * Parameters:
@@ -18,22 +19,30 @@
  *     width and height must be positive integers.
  */
 int board_init(struct Board* b, int width, int height) {
-    struct Graph g; 
-    int num_nodes;
-    int num_edge;
-    if (b == 0) return -1;
-    if ((width<0) || (height<0)) return -2;
+    if (b == NULL) return -1; // Check if the board pointer is null
+    if (width <= 0 || height <= 0) return -2; // Check if width and height are positive integers
 
-    b->width = width; //b points to the width from board.h
-    b->height = height; //b points to the height from board.h
-    num_nodes = width * height;
-    num_edge = 8*num_nodes;
+    b->width = width; // Set the width of the board
+    b->height = height; // Set the height of the board
 
-    // Two ways to create a graph:
-    // struct Graph g;   // Creates on the stack, pass its address via & to graph_init
-    // struct Graph* g = (struct Graph*)malloc(sizeof(struct Graph));  // Creates on the heap, pass g to graph_init
+    int num_nodes = width * height;
+    int num_edges = 8 * num_nodes; // This is an assumption; verify if this is correct for your graph
 
-   graph_init(&g, num_nodes, num_edge);
+    // Allocate memory for the graph on the heap
+    struct Graph* g = (struct Graph*)malloc(sizeof(struct Graph));
+    if (g == NULL) {
+        return -3; // Memory allocation failed
+    }
+
+    // Initialize the graph
+    int result = void graph_init(g, num_nodes, num_edges);
+    if (result != 0) {
+        free(g); // Free allocated memory if initialization fails
+        return result; // Return the error code from graph_init
+    }
+
+    // Set the board's graph pointer
+    b->graph = g; // Assuming the Board struct has a pointer to a Graph
 
     return 0;
 }
