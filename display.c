@@ -21,6 +21,7 @@ void display_board(const struct Board* b) {
     int height = b->height;
     struct Graph* g = b->graph;
 
+    printf ("------------------------");
     // Display board dimensions
     printf("Board Dimensions: %d x %d\n", width, height);
 
@@ -39,7 +40,7 @@ void display_board(const struct Board* b) {
      printf("board nodes:\n");
     for (int x = 0; x < width; ++x) {
         for (int y = 0; y < height; ++y) {
-            printf("[%d]", b->graph->nodes[x][y].num);
+            printf("[%d] ", b->graph->nodes[x][y]->num);
         }
         printf("\n");
     }

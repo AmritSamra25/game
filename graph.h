@@ -6,8 +6,9 @@
 // graph 
 struct Graph
 {
-    struct Node** nodes;  //Points to an array of nodes (NOTE: this declaration could also apply to a linked list)
-    int num_node;
+    int width;
+    int height;
+    struct Node*** nodes;  //Points to a 2-D array of nodes, size width x height
     struct Edge** edges;//Points to an array of edges (NOTE: this declaration could also apply to a linked list)
     int num_edge;
 };

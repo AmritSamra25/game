@@ -27,9 +27,10 @@ int board_init(struct Board* b, int width, int height) {
     b->height = height; // Set the height of the board
 
     int num_nodes = width * height;
-    printf("%d %d %d\n", width, height, num_nodes);
     int num_edges = 8 * num_nodes; // This is an assumption; verify if this is correct for your graph
 
+    printf("width: %d, height: %d, num_nodes: %d\n", width, height, num_nodes);
+    
     // Allocate memory for the graph on the heap
     struct Graph* g = (struct Graph*)malloc(sizeof(struct Graph));
     if (g == NULL) {
@@ -38,7 +39,7 @@ int board_init(struct Board* b, int width, int height) {
 
     // Initialize the graph
     //we are assuming no errors will happen during graph_init
-    graph_init(g, num_nodes, num_edges);
+    graph_init(g, width, height, num_edges);
 
     // Set the board's graph pointer
     b->graph = g; // Assuming the Board struct has a pointer to a Graph
