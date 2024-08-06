@@ -28,29 +28,19 @@ void display_board(const struct Board* b) {
     // For simplicity, we assume a grid-like representation for demonstration purposes
 
     printf("Board Layout:\n");
-    for (int y = 0; y < height; ++y) {
-        for (int x = 0; x < width; ++x) {
+    for (int x = 0; x < width; ++x) {
+        for (int y = 0; y < height; ++y) {
             // Display each cell; this example assumes a simple representation
             printf("[%d,%d] ", x, y);
         }
         printf("\n");
     }
 
-    // Here you would include code to display graph connections if needed
-    // For example, if nodes have labels or specific connections to show
-
-    // Display edges (if applicable)
-    // This is a placeholder; you need to adjust based on your graph's actual representation
-    printf("Graph Edges:\n");
-    for (int i = 0; i < g->num_nodes; ++i) {
-        // Display edges for each node
-        // This will depend on how your graph stores edges
-        printf("Node %d: ", i);
-        // Iterate through edges connected to node i
-        // Example:
-        // for (each edge connected to node i) {
-        //     printf(" -> %d", connected_node);
-        // }
+     printf("board nodes:\n");
+    for (int x = 0; x < width; ++x) {
+        for (int y = 0; y < height; ++y) {
+            printf("[%d]", b->graph->nodes[x][y].num);
+        }
         printf("\n");
     }
 }

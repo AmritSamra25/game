@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #include "board.h"
+#include "display.h"
 
 //main 
 int main(int argc, char **argv) {
@@ -10,14 +11,14 @@ int main(int argc, char **argv) {
 
     printf ("Initial board sizes: %d %d %d %d\n", b.width, b.height, b2->width,b2->height);
 
-    board_init(&b,0,0);
-
     printf("Enter new board width: ");
     scanf("%d" , &b.width);
     printf("Enter new board height: ");
     scanf ("%d" , &b.height);
 
-    board_init(b2, 30, 40);
+    board_init(b2, 4, 3);
+
+    display_board(b2);
 
     printf("board sizes: %d, %d, %d, %d\n", b.width, b.height, b2->width, b2-> height);
 }

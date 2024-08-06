@@ -18,7 +18,7 @@
  *     If b is uninitialized, the results are undefined.
  *     width and height must be positive integers.
  */
-int rocks_init(struct rocks* r, int color) {
+int rocks_init(struct Rocks* r, int color) {
     //if statments to see if the rocks value is 0 or -1
     if (r == 0) return -1;
     // if the color is less then white and / or if the color is greater then purple return -2

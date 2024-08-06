@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "board.h"
 #include "graph.h"
 
@@ -26,6 +27,7 @@ int board_init(struct Board* b, int width, int height) {
     b->height = height; // Set the height of the board
 
     int num_nodes = width * height;
+    printf("%d %d %d\n", width, height, num_nodes);
     int num_edges = 8 * num_nodes; // This is an assumption; verify if this is correct for your graph
 
     // Allocate memory for the graph on the heap
@@ -35,11 +37,8 @@ int board_init(struct Board* b, int width, int height) {
     }
 
     // Initialize the graph
-    int result = void graph_init(g, num_nodes, num_edges);
-    if (result != 0) {
-        free(g); // Free allocated memory if initialization fails
-        return result; // Return the error code from graph_init
-    }
+    //we are assuming no errors will happen during graph_init
+    graph_init(g, num_nodes, num_edges);
 
     // Set the board's graph pointer
     b->graph = g; // Assuming the Board struct has a pointer to a Graph

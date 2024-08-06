@@ -13,7 +13,8 @@ struct Graph
 };
 
 //void graph init
-void graph_init(struct Graph* g, int num_nodes, int num_edge);
+//this assumes the graph structure has already been created
+void graph_init(struct Graph* g, int width, int height, int num_edge);
 
 void create_edge(struct Graph* g, struct Node* node1, struct Node* node2);
 

@@ -1,5 +1,6 @@
 #ifndef BOARD
 #define BOARD
+#include "graph.h"
 /*
  * Insert comments here about what the Board structure is
  * used for, and any other general notes about usage or intent
@@ -7,6 +8,7 @@
 struct Board {
     int width;     // The width of the board (number of nodes)
     int height;    // The height of the board (number of nodes)
+    struct Graph* graph;
 };
 /* 
  * board_init is used to  (insert details here)
