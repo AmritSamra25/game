@@ -3,6 +3,7 @@
 
 #include "board.h"
 #include "display.h"
+#include "graph.h"
 
 //main 
 int main(int argc, char **argv) {
@@ -18,6 +19,14 @@ int main(int argc, char **argv) {
     scanf ("%d" , &height);
     
     board_init(b, width, height);
+    add_edge(b->graph,0,0,0,1);
+    add_edge(b->graph,0,1,0,2);
+    add_edge(b->graph,0,2,0,3);
+    add_edge(b->graph,0,0,1,0);
+    
+    
+    
+
     printf ("Updated board sizes: %d %d\n", b->width, b->height);
 
     display_board(b);

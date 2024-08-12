@@ -44,4 +44,14 @@ void display_board(const struct Board* b) {
         }
         printf("\n");
     }
+
+    int num_edges = b->graph->num_edge;
+    printf("edges connect too: num_edges=%d\n", num_edges);
+
+    for (int x = 0; x < num_edges; ++x) {
+        printf("%d - %d", b->graph->edges[x]->node1->num, b->graph->edges[x]->node2->num);
+        printf("\n");
+
+    }
+    
 }

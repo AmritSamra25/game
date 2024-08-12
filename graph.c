@@ -17,17 +17,17 @@ void graph_init(struct Graph* g, int width, int height, int num_edge){
     for(int i=0; i<width; i++){
         // Allocate enough space for an array of node pointers (a row)
         struct Node** row = (struct Node**)malloc(height * sizeof(struct Node*));
-	nodes[i] = row;
+	    nodes[i] = row;
 	
         for(int j=0; j<height; j++){
 	  // For each node pointer in the row:
 	  // Allocate a node to point to & return its address to the variable "node"
-	  struct Node* node = (struct Node*) malloc ( sizeof (struct Node));
+	        struct Node* node = (struct Node*) malloc ( sizeof (struct Node));
 	  // Set the value of num for the newly created node to be equal to the array index
-	  node -> num = count;
-	  count++;
+	        node -> num = count;
+	        count++;
 	  // Store the address of the new node in the array of pointers to node
-	  nodes[i][j] = node;
+	        nodes[i][j] = node;
         }
     }
 
@@ -46,11 +46,21 @@ void graph_init(struct Graph* g, int width, int height, int num_edge){
 
 }
 
-//connect an edge to nodes up to 2 nodes
-void create_edge(struct Graph* g,struct Node* node1, struct Node* node2) {
+void add_edge(struct Graph* g,int x1, int y1, int x2, int y2){
+    printf("add_edge: %d %d %d %d\n", x1, y1, x2, y2);
+    struct Node* node1 = g->nodes[x1][y1];
+    struct Node* node2 = g->nodes[x2][y2];
+    struct Edge* edge = create_edge(node1, node2);
+    printf("Incrementing number of edges: %d\n", g->num_edge);
+    int num_of_edges = g->num_edge;
 
-    struct Edge * edge = (struct Edge *) malloc (sizeof (struct Edge));
-    edge-> node1 = node1;
-    edge-> node2 = node2;
+    g->edges[num_of_edges] = edge;
+    g->num_edge++;
+
+    printf("Incrementing number of edges(2): %d\n", g->num_edge);
+
 
 }
+
+
+
