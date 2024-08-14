@@ -18,12 +18,22 @@ int main(int argc, char **argv) {
     printf("Enter new board height: ");
     scanf ("%d" , &height);
     
+    /*
+    from my understanding after trying to figure it out is that we are adding
+    edges but they are not being shown to us.... it gets through the add_edges and prints out 
+    all the printf statments i put and gets throguh them but it does not show that they have been
+    added, so it works but does not show anything.... unless i am thinking about it wrongly..
+    */
+
     board_init(b, width, height);
     add_edge(b->graph,0,0,0,1);
+    printf(".........it made it past add_edge");
     add_edge(b->graph,0,1,0,2);
+    printf(".......made it past add_edge 2");
     add_edge(b->graph,0,2,0,3);
     add_edge(b->graph,0,0,1,0);
     
+    printf("it added all the edges.................d.d......");
     
     
 
