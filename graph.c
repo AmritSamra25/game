@@ -2,8 +2,7 @@
 #include <stdio.h>
 #include "graph.h"
 
-
-void graph_init(struct Graph* g, int width, int height, int num_edge){
+void graph_init(struct Graph* g, int width, int height, int edge_array_size) {
     printf("_________width %d, height %d", width, height);
 
     // Set the number of nodes for the graph
@@ -34,18 +33,24 @@ void graph_init(struct Graph* g, int width, int height, int num_edge){
     // Save the new array of node pointers
     g->nodes = nodes;
     // Save the number of edges.
-    g->num_edge = num_edge;
-    // Allocate enough memory for a 1-D array of edges, size  num_edge
-    struct Edge** edges = (struct Edge **) malloc (num_edge * sizeof (struct Edge*));
+    g->edge_array_size = edge_array_size;
+    // Allocate enough memory for a 1-D array of edges, size  edge_array_size
+    struct Edge** edges = (struct Edge **) malloc (edge_array_size * sizeof (struct Edge*));
     // Save the address of the edges array in the graph structure
     g->edges = edges; // g points to the nodes, from graph.h
-   
-    for(int i=0; i<num_edge; i++){
+
+
+    // Initialize the edge array to contain a bunch of null pointers.
+    // The edges will be created inidividually in add_edge (see below).
+    for(int i=0; i<edge_array_size; i++){
         edges[i] = 0;
     }
+    g->num_edge = 0;  // We haven't created any edges yet, just set the pointers to null
 
 }
 
+// Add an edge to the graph.  Every edge connects to two existing nodes.
+// x1, y1, x2, and y2 are the array indices of the nodes in the graph.
 void add_edge(struct Graph* g,int x1, int y1, int x2, int y2){
     printf("add_edge: %d %d %d %d\n", x1, y1, x2, y2);
     struct Node* node1 = g->nodes[x1][y1];
@@ -58,8 +63,6 @@ void add_edge(struct Graph* g,int x1, int y1, int x2, int y2){
     g->num_edge++;
 
     printf("Incrementing number of edges(2): %d\n", g->num_edge);
-
-
 }
 
 
