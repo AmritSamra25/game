@@ -10,7 +10,8 @@ struct Graph
     int height;
     struct Node*** nodes;  //Points to a 2-D array of nodes, size width x height
     struct Edge** edges;//Points to an array of edges (NOTE: this declaration could also apply to a linked list)
-    int num_edge;
+    int edge_array_size;  // The total number of elements in the edge array
+    int num_edge;         // The number of edge structs in the edge array
 };
 
 //void graph init
