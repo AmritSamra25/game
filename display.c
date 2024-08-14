@@ -48,10 +48,13 @@ void display_board(const struct Board* b) {
     int num_edges = b->graph->num_edge;
     printf("edges connect too: num_edges=%d\n", num_edges);
 
+    printf ("graph: 0x%.8X\n", b->graph);
     for (int x = 0; x < num_edges; ++x) {
-        printf("%d - %d", b->graph->edges[x]->node1->num, b->graph->edges[x]->node2->num);
-        printf("\n");
-
+       printf ("-------------\n");
+       printf ("edge: 0x%.8X\n", b->graph->edges[x]);
+       printf ("node1: 0x%.8X\n", b->graph->edges[x]->node1);
+       printf ("node2: 0x%.8X\n", b->graph->edges[x]->node2);
+       printf ("num1: %d\n", b->graph->edges[x]->node1->num);
+       printf ("num2: %d\n", b->graph->edges[x]->node2->num);
     }
-    
 }
