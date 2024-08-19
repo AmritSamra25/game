@@ -13,21 +13,28 @@ void graph_init(struct Graph* g, int width, int height, int edge_array_size) {
     struct Node*** nodes = (struct Node ***) malloc (width * sizeof (struct Node**));
     // Set the adress of the nodes pointer to point to the newly created array.
     int count = 0;
-    for(int i=0; i<width; i++){
+    for(int w=0; w<width; w++){
         // Allocate enough space for an array of node pointers (a row)
         struct Node** row = (struct Node**)malloc(height * sizeof(struct Node*));
-	    nodes[i] = row;
-	
-        for(int j=0; j<height; j++){
-	  // For each node pointer in the row:
-	  // Allocate a node to point to & return its address to the variable "node"
-	        struct Node* node = (struct Node*) malloc ( sizeof (struct Node));
-	  // Set the value of num for the newly created node to be equal to the array index
-	        node -> num = count;
-	        count++;
-	  // Store the address of the new node in the array of pointers to node
-	        nodes[i][j] = node;
-        }
+	    nodes[w] = row;
+        printf("hhhhhhhhhhhhhhhhh\n");
+        
+            for(int h=0; h<height; h++){
+                // For each node pointer in the row:
+	            // Allocate a node to point to & return its address to the variable "node"
+	            struct Node* node = (struct Node*) malloc ( sizeof (struct Node));
+	            // Set the value of num for the newly created node to be equal to the array index
+	            node -> num = count;
+                node -> x = w;
+                node -> y = h;
+	            count++;
+                printf("hhhhhdhdhdhhdhddhdhhdhdhddhdhdh %d \n ",count);
+                // Store the address of the new node in the array of pointers to node
+	            nodes[w][h] = node;
+
+
+
+            }
     }
 
     // Save the new array of node pointers
