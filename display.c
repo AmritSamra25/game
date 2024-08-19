@@ -29,8 +29,8 @@ void display_board(const struct Board* b) {
     // For simplicity, we assume a grid-like representation for demonstration purposes
 
     printf("Board Layout:\n");
-    for (int x = 0; x < width; ++x) {
-        for (int y = 0; y < height; ++y) {
+    for (int y = 0; y < height; ++y) {
+        for (int x = 0; x < width; ++x) {
             // Display each cell; this example assumes a simple representation
             printf("[%d,%d] ", x, y);
         }
@@ -38,8 +38,8 @@ void display_board(const struct Board* b) {
     }
 
      printf("board nodes:\n");
-    for (int x = 0; x < width; ++x) {
-        for (int y = 0; y < height; ++y) {
+     for (int y = 0; y < height; ++y) {
+       for (int x = 0; x < width; ++x) {
             printf("[%d] ", b->graph->nodes[x][y]->num);
         }
         printf("\n");
@@ -49,12 +49,17 @@ void display_board(const struct Board* b) {
     printf("edges connect too: num_edges=%d\n", num_edges);
 
     printf ("graph: 0x%.8X\n", b->graph);
-    for (int x = 0; x < num_edges; ++x) {
-       printf ("-------------\n");
-       printf ("edge: 0x%.8X\n", b->graph->edges[x]);
-       printf ("node1: 0x%.8X\n", b->graph->edges[x]->node1);
-       printf ("node2: 0x%.8X\n", b->graph->edges[x]->node2);
-       printf ("num1: %d\n", b->graph->edges[x]->node1->num);
-       printf ("num2: %d\n", b->graph->edges[x]->node2->num);
+
+    printf ("-------------- Edges --------------\n");
+    printf ("[x1 y1 num] [x2 y2 num] address\n");
+    for (int i = 0; i < num_edges; ++i) {
+      printf ("[%d %d %d] [%d %d %d] %x\n",
+              b->graph->edges[i]->node1->x,
+              b->graph->edges[i]->node1->y,
+              b->graph->edges[i]->node1->num,
+              b->graph->edges[i]->node2->x,
+              b->graph->edges[i]->node2->y,
+              b->graph->edges[i]->node2->num,
+              b->graph->edges[i]);
     }
 }

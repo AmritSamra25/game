@@ -34,45 +34,31 @@ int main(int argc, char **argv) {
     */
 
     board_init(b, width, height);
-    
+    display_board(b);
+
+    printf ("========= Adding edges ============= width=%d, height=%d\n", width, height);
     
     for(int x = 0; x < width; x++){
         for(int y = 0; y < height; y++){
-
-            //check to see if the edge already exists
-            found = 0;
-            for(int e = 0; e < b->graph->num_edge; e++){
-                num1 = b->graph->edges[e]->node1->num;
-                num2 =  b->graph->edges[e]->node2->num;
-                xtmp1 = b->graph->edges[e]->node1->x;
-                ytmp1 = b->graph->edges[e]->node1->y;
-                xtmp2 = b->graph->edges[e]->node2->x;
-                ytmp2 = b->graph->edges[e]->node2->y;
-                printf ("num1, xtmp1, ytmp1: %d %d %d\n", num1, xtmp1, ytmp1);
-                printf ("num1, xtmp1, ytmp1: %d %d %d\n", num1, xtmp1, ytmp1);
-
-                if (((xtmp1==x) && (ytmp1==y) &&
-                    ((xtmp2==x) && (ytmp2==y))) {
-                        found=1;
-                        break;
-                }
-                printf ("num2, xtmp, ytmp: %d %d %d\n", num2, xtmp, ytmp);
-
-                //if(num1[][])
-            }
+            // Add an edge from the current node to the one below
             if(y!=0){
-                add_edge(b->graph,x,y-1,x,y);
-            }
-            if(x!=0){
-                add_edge(b->graph,x-1,y,x,y);
-            }
-            if(x!=width){
-                add_edge(b->graph,x+1,y,x,y);
-            }
-            if(y!=height){
-               add_edge(b->graph,x,y+1,x,y); 
+              add_edge(b->graph, x, y, x, y-1);
             }
 
+            // Add an edge from the curreent node to the one to the left
+            if(x!=0){
+              add_edge(b->graph, x, y, x-1, y);
+            }
+
+            // Add an edge from the current node to the one to the right
+            if(x<(width-1)){
+              add_edge(b->graph, x, y, x+1, y);
+            }
+
+            // Add an edge from the current node to the one above
+            if(y<(height-1)){
+              add_edge(b->graph, x, y, x, y+1);
+            }
         }
     }
 
@@ -81,19 +67,3 @@ int main(int argc, char **argv) {
     display_board(b);
 }
 
-/*
-Returns 1 if an edge exists that connects nodes with X,Y locations (x1,y1) and (x2, y2)
-Returns 0 otherwise.
-*/
-int edge_exists (struct Board* b, int x1, int y1, int x2, int y2) {
-    int num1 = b->graph->edges[e]->node1->num;
-    int num2 =  b->graph->edges[e]->node2->num;
-    int xtmp1 = b->graph->edges[e]->node1->x;
-    int ytmp1 = b->graph->edges[e]->node1->y;
-    int xtmp2 = b->graph->edges[e]->node2->x;
-    int ytmp2 = b->graph->edges[e]->node2->y;
-
-    if ((xtmp1==xtmp2) && (ytmp1==ytmp2)) return 1;
-
-    return 0;
-}

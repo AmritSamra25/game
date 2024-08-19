@@ -16,18 +16,20 @@ void graph_init(struct Graph* g, int width, int height, int edge_array_size) {
     for(int w=0; w<width; w++){
         // Allocate enough space for an array of node pointers (a row)
         struct Node** row = (struct Node**)malloc(height * sizeof(struct Node*));
-	    nodes[w] = row;
+        nodes[w] = row;
         printf("hhhhhhhhhhhhhhhhh\n");
+
+        for(int h=0; h<height; h++){
         
-            for(int h=0; h<height; h++){
                 // For each node pointer in the row:
 	            // Allocate a node to point to & return its address to the variable "node"
 	            struct Node* node = (struct Node*) malloc ( sizeof (struct Node));
 	            // Set the value of num for the newly created node to be equal to the array index
+                    count = h*width + w;
 	            node -> num = count;
-                node -> x = w;
-                node -> y = h;
-	            count++;
+                    node -> x = w;
+                    node -> y = h;
+                    //	            count++;
                 printf("hhhhhdhdhdhhdhddhdhhdhdhddhdhdh %d \n ",count);
                 // Store the address of the new node in the array of pointers to node
 	            nodes[w][h] = node;
@@ -58,19 +60,57 @@ void graph_init(struct Graph* g, int width, int height, int edge_array_size) {
 
 // Add an edge to the graph.  Every edge connects to two existing nodes.
 // x1, y1, x2, and y2 are the array indices of the nodes in the graph.
-void add_edge(struct Graph* g,int x1, int y1, int x2, int y2){
-    printf("add_edge: %d %d %d %d\n", x1, y1, x2, y2);
+//
+// Return values:
+//    0 for success
+//    -1 if the edge already exists.
+//
+int add_edge(struct Graph* g,int x1, int y1, int x2, int y2){
+    int already_exists;
+    //    if (edge_exists(g, x1, y1, x2, y2)) {
+    already_exists = edge_exists(g, x1, y1, x2, y2);
+    if (already_exists) {
+      return -1; // Edge already exists
+    }
+
     struct Node* node1 = g->nodes[x1][y1];
     struct Node* node2 = g->nodes[x2][y2];
     struct Edge* edge = create_edge(node1, node2);
-    printf("Incrementing number of edges: %d\n", g->num_edge);
+    
     int num_of_edges = g->num_edge;
 
     g->edges[num_of_edges] = edge;
     g->num_edge++;
 
-    printf("Incrementing number of edges(2): %d\n", g->num_edge);
+    for (int i=0; i<g->num_edge; i++) {
+      edge = g->edges[i];
+    }
+    return 0;
 }
 
 
+/*
+Returns 1 if an edge exists that connects nodes with X,Y locations (x1,y1) and (x2, y2)
+Returns 0 otherwise.
+*/
+int edge_exists (struct Graph* g, int x1, int y1, int x2, int y2) {
+  // Iterate through all of the existing edges
+  for(int e = 0; e < g->num_edge; e++){
+    // Get the (x,y) locations of the two nodes attached to the edge
+    int xtmp1 = g->edges[e]->node1->x;
+    int ytmp1 = g->edges[e]->node1->y;
+    int xtmp2 = g->edges[e]->node2->x;
+    int ytmp2 = g->edges[e]->node2->y;
 
+    // If the (x,y) locations match the ones from the parameter list,
+    // return immediately.
+    if ((xtmp1==x1) && (ytmp1==y1) &&
+        (xtmp2==x2) && (ytmp1==y2)) return 1;
+    
+    if ((xtmp2==x1) && (ytmp2==y1) &&
+        (xtmp1==x2) && (ytmp1==y2)) return 1;
+  }
+
+  // No nodes were found that match the two (x,y) coordinates.
+  return 0;
+}
