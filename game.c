@@ -26,12 +26,6 @@ int main(int argc, char **argv) {
     printf("Enter new board height: ");
     scanf ("%d" , &height);
     
-    /*
-    from my understanding after trying to figure it out is that we are adding
-    edges but they are not being shown to us.... it gets through the add_edges and prints out 
-    all the printf statments i put and gets throguh them but it does not show that they have been
-    added, so it works but does not show anything.... unless i am thinking about it wrongly..
-    */
 
     board_init(b, width, height);
     display_board(b);
