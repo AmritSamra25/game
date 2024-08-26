@@ -13,4 +13,6 @@
  */
 void display_board(const struct Board* b);
 
+void user_display_board(const struct Board* b);
+
 #endif // DISPLAY_H

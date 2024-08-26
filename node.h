@@ -7,7 +7,7 @@
 
 struct Node
 {
-    struct rocks* rock; //makes the rock node
+    struct Rocks* rock; //makes the rock node
     int num;
     int x;
     int y;

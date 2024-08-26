@@ -2,6 +2,7 @@
 #include "display.h"
 #include "board.h"
 #include "graph.h"
+#include "rocks.h"
 
 /* 
  * Display the board on the console.
@@ -40,7 +41,12 @@ void display_board(const struct Board* b) {
      printf("board nodes:\n");
      for (int y = 0; y < height; ++y) {
        for (int x = 0; x < width; ++x) {
-            printf("[%d] ", b->graph->nodes[x][y]->num);
+        struct Rocks* r = b->graph->nodes[x][y]->rock;
+        char color_char = get_rock_color(r);
+
+
+            int num = b->graph->nodes[x][y]->num;
+            printf("[%d,%c] ",num,color_char);
         }
         printf("\n");
     }
@@ -62,4 +68,27 @@ void display_board(const struct Board* b) {
               b->graph->edges[i]->node2->num,
               b->graph->edges[i]);
     }
+}
+void user_display_board(const struct Board* b){
+    int width = b->width;
+    int height = b->height;
+    struct Graph* g = b->graph;
+
+    printf("USER BOARD:\n");
+    printf("   ");
+    for(int x = 0; x< width; x++){
+        printf(" %d ",x);
+    }
+    printf("\n");
+    for (int y = 0; y < height; ++y) {
+        printf(" %d ", y);
+        for (int x = 0; x < width; ++x) {
+            struct Rocks* r = b->graph->nodes[x][y]->rock;
+            char color_char = get_rock_color(r);
+            // Display each cell; this example assumes a simple representation
+            printf(" %c ", color_char);
+        }
+        printf("\n");
+    }
+
 }

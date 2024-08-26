@@ -31,4 +31,6 @@ struct Rocks
 // rock init 
 int rocks_init(struct Rocks* b, int color);
 
+char get_rock_color(struct Rocks* r);
+
 #endif
