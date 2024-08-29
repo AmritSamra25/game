@@ -33,8 +33,43 @@ int check_move(struct Board* b, int x, int y, int xx, int yy){
   if ((x == xx) && (y == yy)) return -2;
 
   //this part checks to see if their is a piece thier or not before moving it:
+  
+  /*------------------------------------------------------ FROM GREG
+    There are a couple of problems with the expression:
+       if (!b->graph[x][y].has_piece)
+       
+    (1) b->graph points to a graph data structure, which is
+        defined in graph.h.  graph is not an array, so you can't use the [][] to access its members.
+        
+    (2) The graph data structure doesn't contain a has_piece element, so ".has_piece" won't work.
 
-  if (!b->graph[x][y].has_piece) {
+    If you want to determine whether a graph node has a piece, you'll need to get that information
+    from the node itself.
+
+    To access a node by x & y coordinate in the graph, you would use an expression like:
+       b->graph->nodes[x]y]
+
+    If a node's "rock" pointer is equal to zero, it doesn't contain a rock (piece).
+
+    So, to check to see if a node contains a piece (rock), you could use code like this:
+       Node* node_ptr = b->graph->nodes[x][y];
+       if (node_ptr->rock != 0) ...
+
+    Or, alternatively,
+       Node* node_ptr = b->graph->nodes[x][y];
+       if (!node_ptr->rock) ...
+
+    If you want to do everything on one line, you can do this:
+       if (b->graph->nodes[x][y]->rock != 0)
+           OR
+       if (!b->graph->nodes[x][y]->rock)
+
+    I changed your first "if" statement below.  You can change the second.
+    
+    ------------------------------------------------------- FROM GREG */
+
+  //  if (!b->graph[x][y].has_piece) {
+  if (!b->graph->nodes[x][y]->rock) {
         return -3;  // No piece at the starting position
     }
 
