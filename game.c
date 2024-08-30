@@ -74,7 +74,7 @@ int check_move(struct Board* b, int x, int y, int xx, int yy){
     }
 
   // Check if there is a piece at the destination position
-  if (b->graph[xx][yy].has_piece) {
+  if (b->graph->nodes[x][y]->rock) {
       return -4;  // Destination already occupied
   }
 
