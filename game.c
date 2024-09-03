@@ -4,9 +4,26 @@
 #include "board.h"
 #include "display.h"
 #include "graph.h"
+
+
+int PLAYER_1 = RED; //player x
+int PLAYER_2 = BLACK; // player 0
+void move(struct Board* b,int start_x, int start_y, int end_x, int end_y){
+
+  struct Node* n = b->graph->nodes[start_x][start_y];
+
+  struct Node* end_n = b->graph->nodes[end_x][end_y];
+
+  end_n -> rock = n->rock;
+  n -> rock = 0;
+  
+
+}
+
+
 // Example function to determine if the move is legal
 // This is a placeholder; implement the actual game-specific logic
-int is_legal_move(int start_x, int start_y, int end_x, int end_y) {
+int is_legal_move(int start_x, int start_y, int end_x, int end_y, int player_turn) {
     // Assuming pieces can only move one step in any direction (e.g., like a king in chess)
     int dx = abs(end_x - start_x);
     int dy = abs(end_y - start_y);
@@ -16,11 +33,12 @@ int is_legal_move(int start_x, int start_y, int end_x, int end_y) {
 }
 
 
-int check_move(struct Board* b, int x, int y, int xx, int yy){
+int check_move(struct Board* b, int x, int y, int xx, int yy, int player_turn){
   if (x > b->width) return -1;
   if (y > b->height) return -1;
   if (x < 0) return -1;
   if (y < 0) return -1;
+
 
   // Another (shorter) way to do this:
   // if ((x > b->width) || (y > b->height) ...) return -1;
@@ -69,12 +87,20 @@ int check_move(struct Board* b, int x, int y, int xx, int yy){
     ------------------------------------------------------- FROM GREG */
 
   //  if (!b->graph[x][y].has_piece) {
-  if (!b->graph->nodes[x][y]->rock) {
-        return -3;  // No piece at the starting position
+  printf("did we even get this afar zzzzzzzzzz");
+  if (!b->graph->nodes[x][y]->rock) { // No rock at the start position
+    printf("we got heheheehehheheheheheehehehehe");
+    return -3;
+  } else {
+    if(b->graph->nodes[x][y]->rock->color != player_turn){  // Current rock is the player's rock
+      printf("did we get here????????????? ");
+
+       return -3;  // There is a rock at the start position, but it's not the player's turn
+      }
     }
 
   // Check if there is a piece at the destination position
-  if (b->graph->nodes[x][y]->rock) {
+  if (b->graph->nodes[xx][yy]->rock) {
       return -4;  // Destination already occupied
   }
 
@@ -82,7 +108,7 @@ int check_move(struct Board* b, int x, int y, int xx, int yy){
   //jump from more then 1 space)
   // Check if the move is legal (e.g., pieces can only move 1 space at a time)
 // Assuming 'legal_move' is a function or condition that determines the legality of the move.
-  if (!is_legal_move(x, y, xx, yy)) {
+  if (!is_legal_move(x, y, xx, yy,player_turn)) {
     return -5;  // Illegal move according to the game rules
   }
 
@@ -164,11 +190,14 @@ int main(int argc, char **argv) {
 
     int game_over = 0;
 
+    
+    int player_turn = PLAYER_1;
+
     while(!game_over){
       int x, y;
       int xx, yy;
 
-      printf("player 1 pick starting x y: ");
+      printf(" %c, pick starting x y: ",rock_color(player_turn));
       scanf("%d %d" ,&x, &y);
 
 
@@ -177,16 +206,32 @@ int main(int argc, char **argv) {
 
 
 
+
       printf("_______________%d %d %d %d",x,y, xx, yy);
-      if(check_move(b, x,y,xx,yy) == -1) printf("your nums are out of range");
-      if(check_move(b, x,y,xx,yy) == -2) printf("your x y and new x y are the same");
-      if(check_move(b, x,y,xx,yy) == -3) printf("thier is no piece at the starting point");
-      if(check_move(b, x,y,xx,yy) == -4)printf("thier is a piece already thier");
-      if(check_move(b, x,y,xx,yy) == -5)printf("the move is not legal");
-      else printf("everything is good");
+      int is_move_legal = check_move(b, x,y,xx,yy,player_turn);
+      printf("is_move_legal: %d\n", is_move_legal);
+      if(is_move_legal == -1) printf("your nums are out of range");
+      else if(is_move_legal == -2) printf("your x y and new x y are the same");
+      else if(is_move_legal == -3) printf("thier is no piece at the starting point");
+      else if(is_move_legal == -4)printf("thier is a piece already thier");
+      else if(is_move_legal == -5)printf("the move is not legal");
+      else {
+        
+        move(b,x,y,xx,yy);
+        printf("move happened");
+        user_display_board(b);
+        
+
+      }
 
 
-      game_over = 1;
+      if(player_turn == PLAYER_1){
+        player_turn = PLAYER_2;
+      } else{
+        player_turn = PLAYER_1;
+      }
+
+      //game_over = 1;
     }
     
 

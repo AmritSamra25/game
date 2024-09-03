@@ -34,15 +34,26 @@ char get_rock_color(struct Rocks* r){
     char color_char = '-' ;
             
     if(r!=0){
-        int color = r->color;
-        if(color == RED){
-            color_char = 'x';
-        }else if (color == BLACK)
-        {
-            color_char = 'o';
-        }else{
-            color_char = '-';
-        }     
+        return rock_color(r->color);   
+         
     }
     return color_char;
+}
+
+char rock_color(int color){
+
+    char color_char = '-' ; 
+
+    if(color == RED){
+        color_char = 'x';
+    }else if (color == BLACK)
+    {
+        color_char = 'o';
+    }else{
+        color_char = '-';
+    } 
+
+    return color_char;
+
+
 }
